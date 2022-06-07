@@ -14,5 +14,6 @@ namespace VikopRu.Data.Repository
         List<FindingComment> GetFindingComments(Finding finding);
         List<SubComment> GetSubComments(Comment comment);
         Comment GetComment(int id);
+        List<ApplicationUser> GetUsers();
     }
 }

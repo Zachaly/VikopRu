@@ -1,0 +1,17 @@
+﻿@model RegisterViewModel
+
+<form asp-action="Register" asp-controller="Authorisation" method="post">
+    <div>
+        <p>Nazwa użykownika</p>
+        <input asp-for="UserName" />
+    </div>
+    <div>
+        <p>Email</p>
+        <input asp-for="Email" />
+    </div>
+    <div>
+        <p>Hasło</p>
+        <input asp-for="Password" />
+    </div>
+    <input type="submit" value="Utwórz konto"/>
+</form>

@@ -24,5 +24,7 @@ namespace VikopRu.Data.Repository
             => _dbContext.SubComments.Where(subcomment => subcomment.MainCommentId == comment.Id).ToList();
 
         public ApplicationUser GetUser(string id) => _dbContext.Users.First(user => user.Id == id);
+
+        public List<ApplicationUser> GetUsers() => _dbContext.Users.ToList();
     }
 }
