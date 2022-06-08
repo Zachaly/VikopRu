@@ -1,0 +1,62 @@
+﻿*{padding: 0; margin: 0; box-sizing:border-box;}
+
+body {
+    background-color: rgb(34, 33, 33);
+    font-family: Arial;
+    width: 100%;
+    height: 100%;
+}
+
+.container{
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgb(79, 79, 79);
+    min-height: 1000px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+nav{
+    width: 100%;
+    height: 75px;
+    display: flex;
+    background-color: rgb(75, 72, 72);
+    justify-content: center;
+}
+
+nav div {
+    display: flex;
+    margin-left: 20px;
+    align-content: center;
+}
+        
+nav div.account-actions div{
+    margin-left: 0px;
+}
+
+nav div.account-actions img{
+    width: 100px;
+    height: 70px;
+}
+
+nav a, nav div.account-actions p{
+    width: 200px;
+    height: 70px;
+    display: flex;
+    text-decoration: none;
+    color: antiquewhite;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    font-size: 20px;
+}   
+nav div.account-actions p{
+    width: 100px;
+}
+
+nav a:hover{
+    border-bottom: solid 3px antiquewhite;
+    color: rgb(93, 86, 86);
+}

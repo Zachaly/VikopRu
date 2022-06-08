@@ -1,13 +1,10 @@
 ﻿@model LoginViewModel
 
-<form asp-action="Login" asp-controller="Authorisation" method="post">
-    <div>
-        <p>Nazwa użykownika</p>
-        <input asp-for="UserName" />
-    </div>
-    <div>
-        <p>Hasło</p>
-        <input asp-for="Password" />
-    </div>
-    <input type="submit" value="Zaloguj"/>
+<form asp-action="Login" asp-controller="Authorisation" method="post" class="login">
+
+    <input asp-for="UserName" placeholder="Nazwa użykownika"/>
+    
+    <input asp-for="Password" placeholder="Hasło"/>
+    
+    <input type="submit" value="Zaloguj się"/>
 </form>

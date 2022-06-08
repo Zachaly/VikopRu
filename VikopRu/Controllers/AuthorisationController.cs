@@ -62,8 +62,11 @@ namespace VikopRu.Controllers
         {
             var result = await _signInManager.PasswordSignInAsync(viewModel.UserName, viewModel.Password, false, false);
 
-            if(result.Succeeded)
+            if (result.Succeeded)
+            {
+                var user = await _userManager.FindByNameAsync(viewModel.UserName);
                 return RedirectToAction("Index", "Home");
+            }
 
             return RedirectToAction("Login");
         }

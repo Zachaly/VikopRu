@@ -9,6 +9,6 @@ namespace VikopRu.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public string ProfilePicture { get; set; } = "default.jpg";
+        public string ProfilePicture { get; set; } = "default.png";
     }
 }

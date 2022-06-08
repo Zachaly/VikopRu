@@ -3,16 +3,24 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>Lepszy Wykop</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/authorisation.css" asp-append-version="true"/>
 </head>
 <body>
     <nav>
-        <a asp-for="Index" asp-controller="Home">Strona główna</a>
+        <a asp-action="Index" asp-controller="Home">Strona główna</a>
         <div class="account-actions">
             @if (User.Identity.IsAuthenticated)
             {
                 <a asp-controller="Authorisation" asp-action="Logout">Wyloguj</a>
-                <p>@User.Identity.Name</p>
+                <div>
+                    @{
+                        var imgpath = $"/ProfilePicture/{ViewBag.ProfilePicture}";
+                        <img src="@imgpath"/>
+                        <p>@User.Identity.Name</p>
+                    }
+                </div>
             }
             else
             {
