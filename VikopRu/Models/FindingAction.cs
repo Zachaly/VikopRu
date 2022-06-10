@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace VikopRu.Models
 {
     [Keyless]
-    public class FindingComment
+    public class FindingAction
     {
-        public int CommentId { get; set; }
+        public string UserId { get; set; }
         public int FindingId { get; set; }
     }
 }

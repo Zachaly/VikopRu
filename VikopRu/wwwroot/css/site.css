@@ -14,8 +14,6 @@ body {
     background-color: rgb(79, 79, 79);
     min-height: 1000px;
     height: 100%;
-    display: flex;
-    justify-content: center;
 }
 
 nav{
@@ -28,12 +26,13 @@ nav{
 
 nav div {
     display: flex;
-    margin-left: 20px;
-    align-content: center;
+    align-items: center;
 }
         
-nav div.account-actions div{
-    margin-left: 0px;
+nav div.account-actions{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 nav div.account-actions img{
@@ -59,4 +58,10 @@ nav div.account-actions p{
 nav a:hover{
     border-bottom: solid 3px antiquewhite;
     color: rgb(93, 86, 86);
+}
+
+nav div.nav-container{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }

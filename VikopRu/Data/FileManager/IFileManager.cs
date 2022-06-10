@@ -11,5 +11,6 @@ namespace VikopRu.Data.FileManager
     public interface IFileManager
     {
         FileStream ProfilePictureStream(string image);
+        FileStream FindingPictureStream(string image);
     }
 }

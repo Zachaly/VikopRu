@@ -1,1 +1,29 @@
-﻿<h1>Stron główna</h1>
+﻿@model MainPageViewModel
+
+@foreach(var finding in Model.Findings)
+{
+    <div class="finding-mainpage">
+        <div class="diggs-counter">
+            @(finding.Diggs.Count - finding.Buries.Count)
+        </div>
+
+         @{
+                var imgPath = $"/Findings/{finding.ImageName}";
+                <img src="@imgPath">
+         }
+
+        <div class="finding-preview">
+            <h4>@finding.Title</h4>
+
+            <a href="@($"https://{finding.Link}")">@finding.Link</a>
+
+            <div class="creator">
+                @@@finding.Creator.UserName
+            </div>
+
+            <p>
+                @finding.Description
+            </p>
+        </div>
+    </div>
+}

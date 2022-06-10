@@ -12,7 +12,7 @@ namespace VikopRu.Data.Repository
         private AppDbContext _dbContext;
 
         public Repository(AppDbContext dbContext) => _dbContext = dbContext;
-        
+
         public Comment GetComment(int id) => _dbContext.Comments.First(comment => comment.Id == id);
 
         public List<FindingComment> GetFindingComments(Finding finding)
@@ -26,5 +26,10 @@ namespace VikopRu.Data.Repository
         public ApplicationUser GetUser(string id) => _dbContext.Users.First(user => user.Id == id);
 
         public List<ApplicationUser> GetUsers() => _dbContext.Users.ToList();
+
+        public List<FindingAction> GetBuries(int findingId) 
+            => _dbContext.Buries.Where(bury => bury.FindingId == findingId).ToList();
+        public List<FindingAction> GetDiggs(int findingId)
+            => _dbContext.Diggs.Where(dig => dig.FindingId == findingId).ToList();
     }
 }

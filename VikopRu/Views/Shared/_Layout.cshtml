@@ -6,27 +6,30 @@
     <title>Lepszy Wykop</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/authorisation.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/mainpage.css" asp-append-version="true" />
 </head>
 <body>
     <nav>
-        <a asp-action="Index" asp-controller="Home">Strona główna</a>
-        <div class="account-actions">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a asp-controller="Authorisation" asp-action="Logout">Wyloguj</a>
-                <div>
-                    @{
-                        var imgpath = $"/ProfilePicture/{ViewBag.ProfilePicture}";
-                        <img src="@imgpath"/>
-                        <p>@User.Identity.Name</p>
-                    }
-                </div>
-            }
-            else
-            {
-                <a asp-controller="Authorisation" asp-action="Login">Zaloguj się</a>
-                <a asp-controller="Authorisation" asp-action="Register">Zarejestruj się</a>
-            }
+        <div class="nav-container">
+            <a asp-action="Index" asp-controller="Home">Strona główna</a>
+            <div class="account-actions">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Authorisation" asp-action="Logout">Wyloguj</a>
+                    <div>
+                        @{
+                            var imgpath = $"/ProfilePicture/{ViewBag.ProfilePicture}";
+                            <img src="@imgpath"/>
+                            <p>@User.Identity.Name</p>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <a asp-controller="Authorisation" asp-action="Login">Zaloguj się</a>
+                    <a asp-controller="Authorisation" asp-action="Register">Zarejestruj się</a>
+                }
+            </div>
         </div>
     </nav>
 

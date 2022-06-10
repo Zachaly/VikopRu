@@ -1,0 +1,69 @@
+﻿div.finding-mainpage{
+    display: flex;
+    height: 100px;
+    width: 100%;
+    margin: 10px 2px 0 2px;
+    align-items: center;
+}
+
+div.finding-mainpage:first-of-type {
+    display: flex;
+    height: 100px;
+    width: 100%;
+    margin: 0px 2px 0 2px;
+    align-items: center;
+}
+
+div.finding-mainpage img{
+    width: 100px;
+    height: 100%;
+    border-radius: 35px;
+    margin: 0 5px;
+}
+
+div.diggs-counter{
+    width: 100px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 3px antiquewhite;
+    margin: 3px;
+    border-radius: 25px;
+    color: antiquewhite;
+    font-size: 20px;
+}
+
+div.finding-preview {
+    padding: 3px;
+    width: 100%;
+    color: antiquewhite;
+}
+
+div.finding-preview h4{
+    font-size: 22px;
+    width: 100%;
+}
+
+div.finding-preview div.creator{
+    font-size: 14px;
+    margin-top: 3px;
+    color: whitesmoke;
+}
+
+div.finding-preview p{
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+div.finding-preview div.creator:hover{
+    font-size: 14px;
+    margin-top: 3px;
+    color: wheat;
+}
+
+div.finding-preview a{
+    display: block;
+    text-decoration: none;
+    color: wheat;
+}
