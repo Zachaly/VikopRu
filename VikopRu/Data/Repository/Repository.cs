@@ -31,5 +31,15 @@ namespace VikopRu.Data.Repository
             => _dbContext.Buries.Where(bury => bury.FindingId == findingId).ToList();
         public List<FindingAction> GetDiggs(int findingId)
             => _dbContext.Diggs.Where(dig => dig.FindingId == findingId).ToList();
+
+        public void AddFinding(Finding finding) => _dbContext.Findings.Add(finding);
+
+        public async Task<bool> SaveChanges()
+        {
+            if (await _dbContext.SaveChangesAsync() > 0)
+                return true;
+
+            return false;
+        }
     }
 }

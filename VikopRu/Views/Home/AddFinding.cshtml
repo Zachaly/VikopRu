@@ -1,0 +1,9 @@
+﻿@model FindingViewModel
+
+<form asp-action="AddFinding" asp-controller="Home" method="post" class="finding" enctype="multipart/form-data">
+    <input asp-for="Title" placeholder="Tytuł znaleziska" />
+    <input asp-for="Link" placeholder="Link do znaleziska" />
+    <textarea asp-for="Description" placeholder="Opis znaleziska"></textarea>
+    <input asp-for="Image"/>
+    <input type="submit" value="Dodaj"/>
+</form>

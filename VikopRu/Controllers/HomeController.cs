@@ -25,6 +25,24 @@ namespace VikopRu.Controllers
             _repository = repository;
         }
 
+        // overriten to add user profile picture to viewbag by default
+        public override ViewResult View(object view)
+        {
+            try
+            {
+                var userProfileTask = _userManager.GetUserAsync(HttpContext.User);
+                userProfileTask.Wait();
+
+                ViewBag.ProfilePicture = userProfileTask.Result.ProfilePicture;
+            }
+            catch (NullReferenceException)
+            {
+                return base.View(view);
+            }
+
+            return base.View(view);
+        }
+
         public async Task<IActionResult> Index() 
         {
             if (User.Identity.IsAuthenticated)
@@ -60,7 +78,35 @@ namespace VikopRu.Controllers
         public IActionResult FindingPicture(string image)
         {
             var mime = image.Substring(image.LastIndexOf('.') + 1);
-            return new FileStreamResult(_fileManager.ProfilePictureStream(image), $"image/{mime}");
+            return new FileStreamResult(_fileManager.FindingPictureStream(image), $"image/{mime}");
+        }
+
+        [HttpGet]
+        public IActionResult AddFinding() => View(new FindingViewModel());
+
+        [HttpPost]
+        public async Task<IActionResult> AddFinding(FindingViewModel viewModel)
+        {
+            if(!ModelState.IsValid)
+                return RedirectToAction("AddFinding");
+
+            var newFinding = new Finding
+            {
+                Title = viewModel.Title,
+                Description = viewModel.Description,
+                Link = viewModel.Link.Replace("https://", ""),
+                CreatorId = await _userManager.GetUserIdAsync(await _userManager.GetUserAsync(HttpContext.User))
+            };
+
+            if (viewModel.Image != null)
+                newFinding.Image = await _fileManager.SaveFindingPicture(viewModel.Image);
+
+            _repository.AddFinding(newFinding);
+
+            if(await _repository.SaveChanges())
+                return RedirectToAction("Index");
+
+            return RedirectToAction("AddFinding");
         }
     }
 }

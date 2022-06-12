@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/authorisation.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/mainpage.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/addfinding.css" asp-append-version="true" />
 </head>
 <body>
     <nav>
@@ -15,6 +16,7 @@
             <div class="account-actions">
                 @if (User.Identity.IsAuthenticated)
                 {
+                    <a asp-controller="Home" asp-action="AddFinding">Dodaj znalezisko</a>
                     <a asp-controller="Authorisation" asp-action="Logout">Wyloguj</a>
                     <div>
                         @{

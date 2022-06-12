@@ -17,5 +17,9 @@ namespace VikopRu.Data.Repository
         List<ApplicationUser> GetUsers();
         List<FindingAction> GetDiggs(int findingId);
         List<FindingAction> GetBuries(int findingId);
+
+        void AddFinding(Finding finding);
+
+        Task<bool> SaveChanges();
     }
 }

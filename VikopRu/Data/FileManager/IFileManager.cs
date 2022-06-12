@@ -12,5 +12,8 @@ namespace VikopRu.Data.FileManager
     {
         FileStream ProfilePictureStream(string image);
         FileStream FindingPictureStream(string image);
+
+        Task<string> SaveFindingPicture(IFormFile image);
+        Task<string> SaveProfilePicture(IFormFile image);
     }
 }

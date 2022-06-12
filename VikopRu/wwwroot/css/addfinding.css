@@ -1,0 +1,23 @@
+﻿form.finding{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 10px;
+    border: 3px solid antiquewhite;
+    max-width: 500px;
+    border-radius: 10px;
+    margin: auto;
+    height: 300px;
+}
+
+form.finding input, form.finding textarea{
+    font-family: Arial;
+    margin: 5px 0 0 0;
+    width: 100%;
+}
+
+form.finding input{
+    height: 25px;
+}
