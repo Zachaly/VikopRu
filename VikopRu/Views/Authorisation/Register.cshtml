@@ -1,6 +1,6 @@
 ﻿@model RegisterViewModel
 
-<form asp-action="Register" asp-controller="Authorisation" method="post" class="login">
+<form asp-action="Register" asp-controller="Authorisation" method="post" class="login" enctype="multipart/form-data">
 
     <input asp-for="UserName" placeholder="Nazwa użykownika"/>
 
@@ -8,5 +8,8 @@
     
     <input asp-for="Password" placeholder="Hasło"/>
     
+    <label>Zdjęcie profilowe</label>
+    <input asp-for="Image" />
+
     <input type="submit" value="Utwórz konto"/>
 </form>

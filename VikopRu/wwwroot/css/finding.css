@@ -1,0 +1,58 @@
+﻿div.finding{
+    display: flex;
+    height: 200px;
+    border-bottom: solid 2px rgb(135, 135, 135);
+    padding-bottom: 10px;
+}
+
+div.finding div.diggs-counter{
+    height: 75px;
+    width: 75px;
+}
+
+div.finding div.picture{
+    height: 100%;
+    width: 200px;
+    margin-left: 5px;
+}
+
+div.finding div.picture img{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+div.finding div.finding-content {
+    margin-left: 5px;
+    color: aliceblue;
+}
+
+div.finding div.finding-content a{
+    color: aliceblue;
+    text-decoration: none;
+}
+
+div.finding div.finding-content a:hover{
+    color: #888e93;
+}
+
+div.finding div.finding-content h4{
+    font-size: 30px;
+}
+
+div.finding div.tags{
+    color: rgb(132, 131, 131);
+    font-size: 18px;
+}
+
+div.finding div.tags:hover{
+    color: wheat;
+}
+
+div.finding p{
+    text-justify:auto;
+    font-size: 18px;
+}
+
+div.finding div.finding-content h4, div.finding p, div.finding div.tags{
+    margin-top: 5px;
+}

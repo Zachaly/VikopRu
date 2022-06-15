@@ -24,6 +24,7 @@ namespace VikopRu.ViewModels
         [Required]
         public IFormFile Image { get; set; }
 
+        public int FindingId { get; set; }
         public string ImageName { get; set; }
     }
 }

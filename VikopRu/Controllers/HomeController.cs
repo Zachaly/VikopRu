@@ -61,6 +61,7 @@ namespace VikopRu.Controllers
                     Link = finding.Link,
                     Diggs = _repository.GetDiggs(finding.Id),
                     Buries = _repository.GetBuries(finding.Id),
+                    FindingId = finding.Id,
                 }).ToList()
             };
 
@@ -108,5 +109,27 @@ namespace VikopRu.Controllers
 
             return RedirectToAction("AddFinding");
         }
+
+        [HttpGet]
+        public IActionResult Finding(int id)
+        {
+            var finding = _repository.GetFindings().First(finding => finding.Id == id);
+
+            var viewModel = new FindingViewModel
+            {
+                Creator = _repository.GetUser(finding.CreatorId),
+                Description = finding.Description,
+                Title = finding.Title,
+                ImageName = finding.Image,
+                Link = finding.Link,
+                Diggs = _repository.GetDiggs(finding.Id),
+                Buries = _repository.GetBuries(finding.Id),
+                FindingId = finding.Id,
+            };
+
+            return View(viewModel);
+        }
+
+        //public IActionResult Finding(FindingViewModel viewModel) => View(viewModel);
     }
 }

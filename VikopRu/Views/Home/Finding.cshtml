@@ -1,0 +1,21 @@
+﻿@model FindingViewModel
+
+<div class="finding">
+    <div class="diggs-counter">
+        @(Model.Diggs.Count - Model.Buries.Count)
+    </div>
+    <div class="picture">
+        <img src="@($"/Findings/{Model.ImageName}")"/>
+    </div>
+    <div class="finding-content">
+        <h4><a href=@($"https://{Model.Link}")>@Model.Title</a></h4>
+
+        <div class="tags">
+            @@@Model.Creator.UserName
+        </div>
+
+        <p>
+            @Model.Description;
+        </p>
+    </div>
+</div>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VikopRu.Data.FileManager;
 using VikopRu.Data.Repository;
 using VikopRu.Models;
 using VikopRu.ViewModels;
@@ -16,13 +17,15 @@ namespace VikopRu.Controllers
         private UserManager<ApplicationUser> _userManager;
         private IRepository _repository;
         private SignInManager<ApplicationUser> _signInManager;
+        private IFileManager _fileManager;
 
         public AuthorisationController(UserManager<ApplicationUser> userManager, IRepository repository,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager, IFileManager fileManager)
         {
             _userManager = userManager;
             _repository = repository;
             _signInManager = signInManager;
+            _fileManager = fileManager;
         }
 
         [HttpGet]
@@ -34,11 +37,16 @@ namespace VikopRu.Controllers
             if (_repository.GetUsers().Select(user => user.UserName).Contains(viewModel.UserName))
                 return RedirectToAction("Register");
 
+            
+
             var user = new ApplicationUser
             {
                 UserName = viewModel.UserName,
                 Email = viewModel.Email,
             };
+
+            if(viewModel.Image != null)
+                user.ProfilePicture = await _fileManager.SaveProfilePicture(viewModel.Image);
 
             try
             {
