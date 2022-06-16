@@ -12,21 +12,14 @@ using VikopRu.ViewModels;
 
 namespace VikopRu.Controllers
 {
-    public class AuthorisationController : Controller
+    public class AuthorisationController : BaseController
     {
-        private UserManager<ApplicationUser> _userManager;
-        private IRepository _repository;
         private SignInManager<ApplicationUser> _signInManager;
-        private IFileManager _fileManager;
 
         public AuthorisationController(UserManager<ApplicationUser> userManager, IRepository repository,
-            SignInManager<ApplicationUser> signInManager, IFileManager fileManager)
-        {
-            _userManager = userManager;
-            _repository = repository;
-            _signInManager = signInManager;
-            _fileManager = fileManager;
-        }
+            SignInManager<ApplicationUser> signInManager, IFileManager fileManager) 
+            : base(userManager, fileManager, repository) => _signInManager = signInManager;
+        
 
         [HttpGet]
         public IActionResult Register() => View(new RegisterViewModel());
@@ -36,8 +29,6 @@ namespace VikopRu.Controllers
         {
             if (_repository.GetUsers().Select(user => user.UserName).Contains(viewModel.UserName))
                 return RedirectToAction("Register");
-
-            
 
             var user = new ApplicationUser
             {

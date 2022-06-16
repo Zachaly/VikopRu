@@ -26,5 +26,7 @@ namespace VikopRu.ViewModels
 
         public int FindingId { get; set; }
         public string ImageName { get; set; }
+
+        public List<CommentViewModel> Comments { get; set; }
     }
 }

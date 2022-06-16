@@ -399,3 +399,9 @@ FodyWeavers.xsd
 
 VikopRu/wwwroot/images/findings/*
 !VikopRu/wwwroot/images/findings/default.png
+
+VikopRu/wwwroot/images/profilepictures/*
+!VikopRu/wwwroot/images/profilepictures/default.png
+
+VikopRu/wwwroot/images/post/*
+*.jpg

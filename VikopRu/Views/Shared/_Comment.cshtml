@@ -1,0 +1,22 @@
+﻿@model CommentViewModel
+
+<div class="comment">
+    <div class="creator">
+        <img src="@($"/ProfilePicture/{Model.Creator.ProfilePicture}")" />
+    </div>
+
+    <div class="content">
+        <h3 class="username">
+            @Model.Creator.UserName
+        </h3>
+
+        <p>
+            @Model.Content
+        </p>
+
+        @if (!string.IsNullOrEmpty(Model.ImageName))
+        {
+            <img src="@($"/PostImages/{Model.ImageName}")">
+        }
+    </div>
+</div>

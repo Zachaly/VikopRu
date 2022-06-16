@@ -33,6 +33,9 @@ namespace VikopRu.Data.Repository
             => _dbContext.Diggs.Where(dig => dig.FindingId == findingId).ToList();
 
         public void AddFinding(Finding finding) => _dbContext.Findings.Add(finding);
+        public void AddFindingComment(FindingComment comment) => _dbContext.FindingsComments.Add(comment);
+        public void AddComment(Comment comment) => _dbContext.Comments.Add(comment);
+        public void AddSubComment(SubComment subComment) => _dbContext.SubComments.Add(subComment);
 
         public async Task<bool> SaveChanges()
         {

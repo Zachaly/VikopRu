@@ -12,44 +12,13 @@ using VikopRu.ViewModels;
 
 namespace VikopRu.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private IFileManager _fileManager;
-        private UserManager<ApplicationUser> _userManager;
-        private IRepository _repository;
-
         public HomeController(IFileManager fileManager, UserManager<ApplicationUser> userManager, IRepository repository)
+            : base(userManager, fileManager, repository) { }
+
+        public IActionResult Index() 
         {
-            _fileManager = fileManager;
-            _userManager = userManager;
-            _repository = repository;
-        }
-
-        // overriten to add user profile picture to viewbag by default
-        public override ViewResult View(object view)
-        {
-            try
-            {
-                var userProfileTask = _userManager.GetUserAsync(HttpContext.User);
-                userProfileTask.Wait();
-
-                ViewBag.ProfilePicture = userProfileTask.Result.ProfilePicture;
-            }
-            catch (NullReferenceException)
-            {
-                return base.View(view);
-            }
-
-            return base.View(view);
-        }
-
-        public async Task<IActionResult> Index() 
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                ViewBag.ProfilePicture = (await _userManager.FindByNameAsync(User.Identity.Name)).ProfilePicture;
-            }
-
             var viewModel = new MainPageViewModel
             {
                 Findings = _repository.GetFindings().Select(finding => new FindingViewModel
@@ -80,6 +49,12 @@ namespace VikopRu.Controllers
         {
             var mime = image.Substring(image.LastIndexOf('.') + 1);
             return new FileStreamResult(_fileManager.FindingPictureStream(image), $"image/{mime}");
+        }
+        [HttpGet("/PostImages/{image}")]
+        public IActionResult PostImage(string image)
+        {
+            var mime = image.Substring(image.LastIndexOf('.') + 1);
+            return new FileStreamResult(_fileManager.PostPictureStream(image), $"image/{mime}");
         }
 
         [HttpGet]
@@ -125,11 +100,38 @@ namespace VikopRu.Controllers
                 Diggs = _repository.GetDiggs(finding.Id),
                 Buries = _repository.GetBuries(finding.Id),
                 FindingId = finding.Id,
+                Comments = _repository.GetFindingComments(finding).
+                Select(comment => _repository.GetComment(comment.CommentId)).
+                Select(comment => new CommentViewModel
+                {
+                    CommentId = comment.Id,
+                    Creator = _repository.GetUser(comment.PosterId),
+                    Content = comment.Content,
+                    ImageName = comment.Image,
+                })
+                .ToList(),
             };
 
             return View(viewModel);
         }
 
-        //public IActionResult Finding(FindingViewModel viewModel) => View(viewModel);
+        [HttpGet]
+        public IActionResult Comment() => View(new FindingCommentViewModel());
+
+        [HttpPost]
+        public async Task<IActionResult> Comment(FindingCommentViewModel viewModel)
+        {
+            var comment = await AddComment(viewModel);
+
+            _repository.AddFindingComment(new FindingComment
+            {
+                CommentId = comment.Id,
+                FindingId = viewModel.FindingId,
+            });
+
+            await _repository.SaveChanges();
+
+            return RedirectToAction("Finding", "Home", new { id = viewModel.FindingId} );
+        }
     }
 }

@@ -19,6 +19,9 @@ namespace VikopRu.Data.Repository
         List<FindingAction> GetBuries(int findingId);
 
         void AddFinding(Finding finding);
+        void AddFindingComment(FindingComment comment);
+        void AddComment(Comment comment);
+        void AddSubComment(SubComment subComment);
 
         Task<bool> SaveChanges();
     }

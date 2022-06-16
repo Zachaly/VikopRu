@@ -1,0 +1,12 @@
+﻿@model FindingCommentViewModel
+
+<form asp-action="Comment" asp-controller="Home" method="post" enctype="multipart/form-data" class="comment">
+    <div>
+        <textarea asp-for="Content">
+
+        </textarea>
+        <input asp-for="Image" />
+    </div>
+    <input asp-for="FindingId" hidden />
+    <input type="submit" value="Dodaj komentarz"/>
+</form>

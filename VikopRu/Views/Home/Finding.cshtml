@@ -15,7 +15,18 @@
         </div>
 
         <p>
-            @Model.Description;
+            @Model.Description
         </p>
     </div>
+</div>
+
+<div class="comment-section">
+    @foreach(var comment in Model.Comments)
+    {
+        await Html.RenderPartialAsync("_Comment", comment);
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        await Html.RenderPartialAsync("_CommentForm", new FindingCommentViewModel {FindingId = Model.FindingId});
+    }
 </div>

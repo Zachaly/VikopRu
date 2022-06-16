@@ -1,0 +1,57 @@
+﻿div.comment {
+    display: flex;
+    border-bottom: rgb(34, 33, 33) solid 4px;
+}
+
+div.comment-section{
+    margin-top: 5px;
+}
+
+div.comment .creator img{
+    height: 75px;
+    margin: 2px;
+}
+
+div.comment .content{
+    width: 100%;
+    margin-right: 5px;
+}
+
+div.comment .content .username{
+    color: wheat;
+    padding: 3px;
+    border-bottom: solid rgb(135, 135, 135) 2px;
+    width: 100%;
+}
+
+div.comment .content p{
+    color: aliceblue;
+    margin: 2px;
+    margin-bottom: 5px;
+}
+
+div.comment .content img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+form.comment {
+    margin: 5px;
+}
+form.comment input, form.comment textarea{
+    margin: 2px;
+}
+
+form.comment textarea{
+    background-color: dimgray;
+    color: aliceblue;
+    height: 75px;
+    font-size: 16px;
+    font-family: Arial;
+    padding: 7px;
+}
+
+form.comment div{
+    display: flex;
+    flex-direction: column;
+}

@@ -13,11 +13,13 @@ namespace VikopRu.Data.FileManager
     {
         private readonly string _profilePicturePath;
         private readonly string _findingPicturePath;
+        private readonly string _postPicturePath;
 
         public FileManager(IConfiguration configuration)
         {
-            _profilePicturePath = configuration["Path:ProfilePictures"];
+            _profilePicturePath = configuration["Path:ProfilePicture"];
             _findingPicturePath = configuration["Path:FindingImages"];
+            _postPicturePath = configuration["Path:PostImages"];
         }
 
         public FileStream FindingPictureStream(string image)
@@ -26,11 +28,14 @@ namespace VikopRu.Data.FileManager
         public FileStream ProfilePictureStream(string image)
             => new FileStream(Path.Combine(_profilePicturePath, image), FileMode.Open, FileAccess.Read);
 
+        public FileStream PostPictureStream(string image)
+            => new FileStream(Path.Combine(_postPicturePath, image), FileMode.Open, FileAccess.Read);
+
         private async Task<string> SaveImage(IFormFile image, string savePath)
         {
             try
             {
-                if (!Directory.Exists(_findingPicturePath))
+                if (!Directory.Exists(savePath))
                 {
                     Directory.CreateDirectory(savePath);
                 }
@@ -54,5 +59,7 @@ namespace VikopRu.Data.FileManager
 
         public async Task<string> SaveFindingPicture(IFormFile image) => await SaveImage(image, _findingPicturePath);
         public async Task<string> SaveProfilePicture(IFormFile image) => await SaveImage(image, _profilePicturePath);
+        public async Task<string> SavePostPicture(IFormFile image) => await SaveImage(image, _postPicturePath);
+        
     }
 }
