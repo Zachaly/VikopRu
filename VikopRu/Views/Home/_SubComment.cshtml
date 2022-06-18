@@ -1,12 +1,13 @@
-﻿@model CommentViewModel
+﻿@model SubCommentViewModel
 
-<form asp-action="Comment" asp-controller="Home" method="post" enctype="multipart/form-data" class="comment">
+<form asp-action="SubComment" asp-controller="Home" method="post" enctype="multipart/form-data" class="comment subcomment">
     <div>
         <textarea asp-for="Content">
 
         </textarea>
         <input asp-for="Image" />
     </div>
+    <input asp-for="MainCommentId" hidden />
     <input asp-for="FindingId" hidden />
     <input type="submit" value="Dodaj komentarz"/>
 </form>

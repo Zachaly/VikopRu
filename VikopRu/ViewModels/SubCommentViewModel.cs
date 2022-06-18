@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace VikopRu.ViewModels
 {
-    public class FindingCommentViewModel : CommentViewModel
+    public class SubCommentViewModel : CommentViewModel
     {
-        public int FindingId { get; set; }
+        public int MainCommentId { get; set; }
     }
 }

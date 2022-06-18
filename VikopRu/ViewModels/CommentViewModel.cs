@@ -15,5 +15,7 @@ namespace VikopRu.ViewModels
         public string Content { get; set; }
         public IFormFile Image { get; set; }
         public string ImageName { get; set; }
+        public List<SubCommentViewModel> SubComments { get; set; } = new List<SubCommentViewModel>();
+        public int FindingId { get; set; }
     }
 }

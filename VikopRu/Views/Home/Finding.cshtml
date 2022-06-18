@@ -1,5 +1,7 @@
 ﻿@model FindingViewModel
-
+@{
+    ViewBag.FindingId = Model.FindingId;
+}
 <div class="finding">
     <div class="diggs-counter">
         @(Model.Diggs.Count - Model.Buries.Count)
@@ -21,12 +23,17 @@
 </div>
 
 <div class="comment-section">
-    @foreach(var comment in Model.Comments)
+    
+    @foreach (var comment in Model.Comments)
     {
-        await Html.RenderPartialAsync("_Comment", comment);
+        <div class="comment-container">
+            @{
+                await Html.RenderPartialAsync("_Comment", comment);
+            }
+        </div>
     }
     @if (User.Identity.IsAuthenticated)
     {
-        await Html.RenderPartialAsync("_CommentForm", new FindingCommentViewModel {FindingId = Model.FindingId});
+        await Html.RenderPartialAsync("_CommentForm", new CommentViewModel {FindingId = Model.FindingId});
     }
 </div>

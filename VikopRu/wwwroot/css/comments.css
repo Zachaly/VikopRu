@@ -1,6 +1,5 @@
 ﻿div.comment {
     display: flex;
-    border-bottom: rgb(34, 33, 33) solid 4px;
 }
 
 div.comment-section{
@@ -54,4 +53,16 @@ form.comment textarea{
 form.comment div{
     display: flex;
     flex-direction: column;
+}
+
+div.subcomments > div{
+    display: flex;
+}
+
+div.subcomments div.filler{
+    width: 100px;
+}
+
+div.comment-container {
+    border-bottom: rgb(34, 33, 33) solid 4px;
 }

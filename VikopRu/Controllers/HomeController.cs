@@ -108,6 +108,15 @@ namespace VikopRu.Controllers
                     Creator = _repository.GetUser(comment.PosterId),
                     Content = comment.Content,
                     ImageName = comment.Image,
+                    FindingId = finding.Id,
+                    SubComments = _repository.GetSubComments(comment).Select(subcomment => new SubCommentViewModel
+                    {
+                        MainCommentId = comment.Id,
+                        ImageName = subcomment.Image,
+                        Content = subcomment.Content,
+                        Creator = _repository.GetUser(subcomment.PosterId),
+                        FindingId = finding.Id
+                    }).ToList()
                 })
                 .ToList(),
             };
@@ -116,10 +125,10 @@ namespace VikopRu.Controllers
         }
 
         [HttpGet]
-        public IActionResult Comment() => View(new FindingCommentViewModel());
+        public IActionResult Comment() => View(new CommentViewModel());
 
         [HttpPost]
-        public async Task<IActionResult> Comment(FindingCommentViewModel viewModel)
+        public async Task<IActionResult> Comment(CommentViewModel viewModel)
         {
             var comment = await AddComment(viewModel);
 
@@ -132,6 +141,29 @@ namespace VikopRu.Controllers
             await _repository.SaveChanges();
 
             return RedirectToAction("Finding", "Home", new { id = viewModel.FindingId} );
+        }
+
+        [HttpGet]
+        public IActionResult SubComment() => View(new SubCommentViewModel());
+
+        [HttpPost]
+        public async Task<IActionResult> SubComment(SubCommentViewModel viewModel)
+        {
+            var subcomment = new SubComment
+            {
+                MainCommentId = viewModel.MainCommentId,
+                Content = viewModel.Content,
+                PosterId = (await _userManager.GetUserAsync(HttpContext.User)).Id,
+            };
+
+            if(viewModel.Image != null)
+                subcomment.Image = await _fileManager.SavePostPicture(viewModel.Image);
+
+            _repository.AddSubComment(subcomment);
+
+            await _repository.SaveChanges();
+
+            return RedirectToAction("Finding", "Home", new { id = viewModel.FindingId });
         }
     }
 }
