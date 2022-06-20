@@ -165,5 +165,27 @@ namespace VikopRu.Controllers
 
             return RedirectToAction("Finding", "Home", new { id = viewModel.FindingId });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> FindingAction(int id, bool dig)
+        {
+            var newAction = new FindingAction
+            {
+                FindingId = id,
+                UserId = (await _userManager.GetUserAsync(HttpContext.User)).Id,
+                IsDig = dig
+            };
+
+            if (_repository.GetAllActions().Any(action => action.FindingId == id && action.UserId == newAction.UserId))
+                _repository.RemoveAction(_repository.GetAllActions().
+                    First(action => action.FindingId == newAction.FindingId && 
+                                    action.UserId == newAction.UserId).Id);
+
+            _repository.AddAction(newAction);
+
+            await _repository.SaveChanges();
+
+            return RedirectToAction("Finding", "Home", new { id = id });
+        }
     }
 }

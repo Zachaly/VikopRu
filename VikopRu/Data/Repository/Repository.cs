@@ -28,10 +28,13 @@ namespace VikopRu.Data.Repository
         public List<ApplicationUser> GetUsers() => _dbContext.Users.ToList();
 
         public List<FindingAction> GetBuries(int findingId) 
-            => _dbContext.Buries.Where(bury => bury.FindingId == findingId).ToList();
+            => _dbContext.FindingActions.Where(action => !action.IsDig).Where(bury => bury.FindingId == findingId).ToList();
         public List<FindingAction> GetDiggs(int findingId)
-            => _dbContext.Diggs.Where(dig => dig.FindingId == findingId).ToList();
+            => _dbContext.FindingActions.Where(action => action.IsDig).Where(dig => dig.FindingId == findingId).ToList();
+        public List<FindingAction> GetAllActions() => _dbContext.FindingActions.ToList();
 
+        public void AddAction(FindingAction action) => _dbContext.FindingActions.Add(action);
+        public void RemoveAction(int id) => _dbContext.FindingActions.Remove(_dbContext.FindingActions.First(action => action.Id == id));
         public void AddFinding(Finding finding) => _dbContext.Findings.Add(finding);
         public void AddFindingComment(FindingComment comment) => _dbContext.FindingsComments.Add(comment);
         public void AddComment(Comment comment) => _dbContext.Comments.Add(comment);

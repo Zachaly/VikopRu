@@ -17,7 +17,6 @@ namespace VikopRu.Data
         public DbSet<FindingComment> FindingsComments { get; set; }
         public DbSet<SubComment> SubComments { get; set; }
 
-        public DbSet<FindingAction> Diggs { get; set; }
-        public DbSet<FindingAction> Buries { get; set; }
+        public DbSet<FindingAction> FindingActions { get; set; }
     }
 }

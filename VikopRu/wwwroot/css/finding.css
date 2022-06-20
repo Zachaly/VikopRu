@@ -56,3 +56,22 @@ div.finding p{
 div.finding div.finding-content h4, div.finding p, div.finding div.tags{
     margin-top: 5px;
 }
+
+div.diggs-counter-container form{
+    padding: 5px;
+    margin: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+div.diggs-counter-container form button{
+    height: 25px;
+    background-color: darkslategrey;
+    border: 1px solid black;
+    border-radius: 7px;
+    color: aliceblue;
+}
+
+div.diggs-counter-container form button:hover{
+    background-color: #376868;
+}

@@ -3,8 +3,21 @@
     ViewBag.FindingId = Model.FindingId;
 }
 <div class="finding">
-    <div class="diggs-counter">
-        @(Model.Diggs.Count - Model.Buries.Count)
+    <div class="diggs-counter-container">
+        <div class="diggs-counter">
+            @(Model.Diggs.Count - Model.Buries.Count)
+        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @using (Html.BeginForm("FindingAction", "Home", new { id = Model.FindingId, dig = true }, FormMethod.Post))
+            {
+                <button>Wykop</button>
+            }
+            @using (Html.BeginForm("FindingAction", "Home", new { id = Model.FindingId, dig = false }, FormMethod.Post))
+            {
+                <button>Zakop</button>
+            }
+        }
     </div>
     <div class="picture">
         <img src="@($"/Findings/{Model.ImageName}")"/>
