@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VikopRu.Data.FileManager;
 using VikopRu.Data.Repository;
@@ -38,25 +35,17 @@ namespace VikopRu.Controllers
         }
 
         [HttpGet("/ProfilePicture/{image}")]
-        public IActionResult ProfilePicture(string image)
-        {
-            var mime = image.Substring(image.LastIndexOf('.') + 1);
-            return new FileStreamResult(_fileManager.ProfilePictureStream(image), $"image/{mime}");
-        }
-
+        public IActionResult ProfilePicture(string image) 
+            => new FileStreamResult(_fileManager.ProfilePictureStream(image), $"image/{GetImageMime(image)}");
+        
         [HttpGet("/Findings/{image}")]
-        public IActionResult FindingPicture(string image)
-        {
-            var mime = image.Substring(image.LastIndexOf('.') + 1);
-            return new FileStreamResult(_fileManager.FindingPictureStream(image), $"image/{mime}");
-        }
+        public IActionResult FindingPicture(string image) 
+            => new FileStreamResult(_fileManager.FindingPictureStream(image), $"image/{GetImageMime(image)}");
+        
         [HttpGet("/PostImages/{image}")]
         public IActionResult PostImage(string image)
-        {
-            var mime = image.Substring(image.LastIndexOf('.') + 1);
-            return new FileStreamResult(_fileManager.PostPictureStream(image), $"image/{mime}");
-        }
-
+            => new FileStreamResult(_fileManager.PostPictureStream(image), $"image/{GetImageMime(image)}");
+        
         [HttpGet]
         public IActionResult AddFinding() => View(new FindingViewModel());
 
@@ -71,7 +60,7 @@ namespace VikopRu.Controllers
                 Title = viewModel.Title,
                 Description = viewModel.Description,
                 Link = viewModel.Link.Replace("https://", ""),
-                CreatorId = await _userManager.GetUserIdAsync(await _userManager.GetUserAsync(HttpContext.User))
+                CreatorId = await GetCurrentUserId()
             };
 
             if (viewModel.Image != null)
@@ -153,7 +142,7 @@ namespace VikopRu.Controllers
             {
                 MainCommentId = viewModel.MainCommentId,
                 Content = viewModel.Content,
-                PosterId = (await _userManager.GetUserAsync(HttpContext.User)).Id,
+                PosterId = await GetCurrentUserId(),
             };
 
             if(viewModel.Image != null)
@@ -172,7 +161,7 @@ namespace VikopRu.Controllers
             var newAction = new FindingAction
             {
                 FindingId = id,
-                UserId = (await _userManager.GetUserAsync(HttpContext.User)).Id,
+                UserId = await GetCurrentUserId(),
                 IsDig = dig
             };
 

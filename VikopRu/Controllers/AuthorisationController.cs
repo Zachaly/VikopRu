@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VikopRu.Data.FileManager;
 using VikopRu.Data.Repository;
@@ -63,7 +61,6 @@ namespace VikopRu.Controllers
 
             if (result.Succeeded)
             {
-                var user = await _userManager.FindByNameAsync(viewModel.UserName);
                 return RedirectToAction("Index", "Home");
             }
 

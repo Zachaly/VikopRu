@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VikopRu.Data.FileManager;
 using VikopRu.Data.Repository;
@@ -61,11 +58,14 @@ namespace VikopRu.Controllers
             return base.View();
         }
 
+        /// <summary>
+        /// Creating a basic comment
+        /// </summary>
         protected async Task<Comment> AddComment(CommentViewModel viewModel)
         {
             var comment = new Comment
             {
-                PosterId = (await _userManager.GetUserAsync(HttpContext.User)).Id,
+                PosterId = await GetCurrentUserId(),
                 Content = viewModel.Content,
             };
 
@@ -78,5 +78,12 @@ namespace VikopRu.Controllers
 
             return comment;
         }
+
+        protected string GetImageMime(string image) => image.Substring(image.LastIndexOf('.') + 1);
+
+        /// <summary>
+        /// Gets id of the current logged user
+        /// </summary>
+        protected async Task<string> GetCurrentUserId() => (await _userManager.GetUserAsync(HttpContext.User)).Id;
     }
 }

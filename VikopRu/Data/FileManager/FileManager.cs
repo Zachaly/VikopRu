@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace VikopRu.Data.FileManager
@@ -31,6 +28,9 @@ namespace VikopRu.Data.FileManager
         public FileStream PostPictureStream(string image)
             => new FileStream(Path.Combine(_postPicturePath, image), FileMode.Open, FileAccess.Read);
 
+        /// <summary>
+        /// Saves given image in given folder
+        /// </summary>
         private async Task<string> SaveImage(IFormFile image, string savePath)
         {
             try
@@ -60,6 +60,5 @@ namespace VikopRu.Data.FileManager
         public async Task<string> SaveFindingPicture(IFormFile image) => await SaveImage(image, _findingPicturePath);
         public async Task<string> SaveProfilePicture(IFormFile image) => await SaveImage(image, _profilePicturePath);
         public async Task<string> SavePostPicture(IFormFile image) => await SaveImage(image, _postPicturePath);
-        
     }
 }
