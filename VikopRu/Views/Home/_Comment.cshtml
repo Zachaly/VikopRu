@@ -7,9 +7,25 @@
     </div>
 
     <div class="content">
-        <h3 class="username">
-        @Model.Creator.UserName
-        </h3>
+        <div class="top">
+            <h3 class="username">
+            @Model.Creator.UserName
+            </h3>
+            <div class="reactions">
+                @(Model.PositiveReactions.Count - Model.NegativeReactions.Count)
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @using(Html.BeginForm("CommentReaction", "Home", new {commentId = Model.CommentId, findingId = Model.FindingId, positive = true}, FormMethod.Post))
+                    {
+                        <button class="plus">+</button>
+                    }
+                    @using(Html.BeginForm("CommentReaction", "Home", new {commentId = Model.CommentId, findingId = Model.FindingId, positive = false}, FormMethod.Post))
+                    {
+                        <button class="minus">-</button>
+                    }
+                }
+            </div>
+        </div>
 
         <p>
             @Model.Content
@@ -19,22 +35,22 @@
         {
             <img src="@($"/PostImages/{Model.ImageName}")">
         }
-</div>
+    </div>
    
-</div> 
+</div>
 <div class="subcomments">
         @foreach(var subcomment in Model.SubComments)
         {
-            <div>
+            <div> 
                 <div class="filler"></div>
                 @{
-                await Html.RenderPartialAsync("_Comment", subcomment);
+                    await Html.RenderPartialAsync("_Comment", subcomment);
                 }
             </div>
         }
-
         @if (User.Identity.IsAuthenticated && Model is SubCommentViewModel == false)
         {
-            await Html.RenderPartialAsync("_SubComment", new SubCommentViewModel { MainCommentId = Model.CommentId, FindingId = Model.FindingId });
+            await Html.RenderPartialAsync("_SubComment",
+            new SubCommentViewModel { MainCommentId = Model.CommentId, FindingId = Model.FindingId });
         }
 </div>

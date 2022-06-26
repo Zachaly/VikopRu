@@ -101,11 +101,16 @@ namespace VikopRu.Controllers
                     SubComments = _repository.GetSubComments(comment).Select(subcomment => new SubCommentViewModel
                     {
                         MainCommentId = comment.Id,
+                        CommentId = subcomment.Id,
                         ImageName = subcomment.Image,
                         Content = subcomment.Content,
                         Creator = _repository.GetUser(subcomment.PosterId),
-                        FindingId = finding.Id
-                    }).ToList()
+                        FindingId = finding.Id,
+                        PositiveReactions = _repository.GetPosiviteCommentReactions(subcomment.Id),
+                        NegativeReactions = _repository.GetNegativeCommentReactions(subcomment.Id),
+                    }).ToList(),
+                    PositiveReactions = _repository.GetPosiviteCommentReactions(comment.Id),
+                    NegativeReactions = _repository.GetNegativeCommentReactions(comment.Id),
                 })
                 .ToList(),
             };
@@ -175,6 +180,32 @@ namespace VikopRu.Controllers
             await _repository.SaveChanges();
 
             return RedirectToAction("Finding", "Home", new { id = id });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CommentReaction(int commentId, int findingId, bool positive)
+        {
+            var newReaction = new CommentReaction
+            {
+                CommentId = commentId,
+                UserId = await GetCurrentUserId(),
+                Positive = positive
+            };
+
+            if (_repository.GetAllCommentReactions().
+                Any(reaction => reaction.CommentId == newReaction.CommentId
+                && reaction.UserId == newReaction.UserId))
+            {
+                _repository.RemoveCommentReaction(_repository.GetAllCommentReactions().
+                    First(reaction => reaction.CommentId == newReaction.CommentId 
+                    && reaction.UserId == newReaction.UserId).Id);
+            }
+
+            _repository.AddCommentReaction(newReaction);
+
+            await _repository.SaveChanges();
+
+            return RedirectToAction("Finding", "Home", new { id = findingId });
         }
     }
 }

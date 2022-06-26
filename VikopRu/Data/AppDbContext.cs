@@ -13,5 +13,6 @@ namespace VikopRu.Data
         public DbSet<SubComment> SubComments { get; set; }
 
         public DbSet<FindingAction> FindingActions { get; set; }
+        public DbSet<CommentReaction> CommentReactions { get; set; }
     }
 }

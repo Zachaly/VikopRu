@@ -36,5 +36,12 @@ namespace VikopRu.Data.Repository
         void AddSubComment(SubComment subComment);
 
         Task<bool> SaveChanges();
+
+        List<CommentReaction> GetPosiviteCommentReactions(int commentId);
+        List<CommentReaction> GetNegativeCommentReactions(int commentId);
+        List<CommentReaction> GetAllCommentReactions();
+
+        void AddCommentReaction(CommentReaction reaction);
+        void RemoveCommentReaction(int id);
     }
 }

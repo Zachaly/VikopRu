@@ -45,5 +45,16 @@ namespace VikopRu.Data.Repository
 
             return false;
         }
+
+        public List<CommentReaction> GetPosiviteCommentReactions(int commentId)
+            => _dbContext.CommentReactions.Where(reaction => reaction.CommentId == commentId && reaction.Positive).ToList();
+
+        public List<CommentReaction> GetNegativeCommentReactions(int commentId)
+            => _dbContext.CommentReactions.Where(reaction => reaction.CommentId == commentId && !reaction.Positive).ToList();
+
+        public List<CommentReaction> GetAllCommentReactions() => _dbContext.CommentReactions.ToList();
+        public void AddCommentReaction(CommentReaction reaction) => _dbContext.CommentReactions.Add(reaction);
+        public void RemoveCommentReaction(int id) 
+            => _dbContext.CommentReactions.Remove(_dbContext.CommentReactions.First(reaction => reaction.Id == id));
     }
 }

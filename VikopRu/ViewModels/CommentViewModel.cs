@@ -13,5 +13,7 @@ namespace VikopRu.ViewModels
         public string ImageName { get; set; }
         public List<SubCommentViewModel> SubComments { get; set; } = new List<SubCommentViewModel>();
         public int FindingId { get; set; }
+        public List<CommentReaction> PositiveReactions { get; set; }
+        public List<CommentReaction> NegativeReactions { get; set; }
     }
 }
