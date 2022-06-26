@@ -9,7 +9,8 @@
     <div class="content">
         <div class="top">
             <h3 class="username">
-            @Model.Creator.UserName
+            @Model.Creator.UserName, 
+            @Model.Created
             </h3>
             <div class="reactions">
                 @(Model.PositiveReactions.Count - Model.NegativeReactions.Count)

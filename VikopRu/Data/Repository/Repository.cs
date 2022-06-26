@@ -16,7 +16,7 @@ namespace VikopRu.Data.Repository
         public List<FindingComment> GetFindingComments(Finding finding)
             => _dbContext.FindingsComments.Where(comment => comment.FindingId == finding.Id).ToList();
 
-        public List<Finding> GetFindings() => _dbContext.Findings.ToList();
+        public List<Finding> GetFindings() => _dbContext.Findings.OrderByDescending(finding => finding.Created).ToList();
 
         public List<SubComment> GetSubComments(Comment comment)
             => _dbContext.SubComments.Where(subcomment => subcomment.MainCommentId == comment.Id).ToList();

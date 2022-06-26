@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VikopRu.Models;
@@ -24,5 +25,6 @@ namespace VikopRu.ViewModels
         public string ImageName { get; set; }
 
         public List<CommentViewModel> Comments { get; set; }
+        public DateTime Created { get; set; }
     }
 }

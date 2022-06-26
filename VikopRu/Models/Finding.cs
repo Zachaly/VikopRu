@@ -1,4 +1,6 @@
-﻿namespace VikopRu.Models
+﻿using System;
+
+namespace VikopRu.Models
 {
     public class Finding
     {
@@ -8,5 +10,6 @@
         public string Description { get; set; }
         public string CreatorId { get; set; }
         public string Image { get; set; } = "default.png";
+        public DateTime Created { get; set; } = DateTime.Now;
     }
 }

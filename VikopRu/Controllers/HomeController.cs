@@ -28,6 +28,7 @@ namespace VikopRu.Controllers
                     Diggs = _repository.GetDiggs(finding.Id),
                     Buries = _repository.GetBuries(finding.Id),
                     FindingId = finding.Id,
+                    Created = finding.Created
                 }).ToList()
             };
 
@@ -108,11 +109,14 @@ namespace VikopRu.Controllers
                         FindingId = finding.Id,
                         PositiveReactions = _repository.GetPosiviteCommentReactions(subcomment.Id),
                         NegativeReactions = _repository.GetNegativeCommentReactions(subcomment.Id),
+                        Created = subcomment.Created
                     }).ToList(),
                     PositiveReactions = _repository.GetPosiviteCommentReactions(comment.Id),
                     NegativeReactions = _repository.GetNegativeCommentReactions(comment.Id),
+                    Created = comment.Created
                 })
                 .ToList(),
+                Created = finding.Created
             };
 
             return View(viewModel);

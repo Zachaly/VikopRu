@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using VikopRu.Models;
 
@@ -15,5 +16,6 @@ namespace VikopRu.ViewModels
         public int FindingId { get; set; }
         public List<CommentReaction> PositiveReactions { get; set; }
         public List<CommentReaction> NegativeReactions { get; set; }
+        public DateTime Created { get; set; }
     }
 }
