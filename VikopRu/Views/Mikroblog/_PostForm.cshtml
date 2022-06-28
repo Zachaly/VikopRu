@@ -1,0 +1,11 @@
+﻿@model MikroblogPostViewModel
+
+<form asp-action="Post" asp-controller="Mikroblog" method="post" enctype="multipart/form-data" class="comment">
+    <div>
+        <textarea asp-for="Content">
+
+        </textarea>
+        <input asp-for="Image" />
+    </div>
+    <input type="submit" value="Dodaj post"/>
+</form>

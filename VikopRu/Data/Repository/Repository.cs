@@ -56,5 +56,21 @@ namespace VikopRu.Data.Repository
         public void AddCommentReaction(CommentReaction reaction) => _dbContext.CommentReactions.Add(reaction);
         public void RemoveCommentReaction(int id) 
             => _dbContext.CommentReactions.Remove(_dbContext.CommentReactions.First(reaction => reaction.Id == id));
+
+        public List<MikroblogPost> GetMikroblogPosts() 
+            => _dbContext.MikroblogPosts.OrderByDescending(post => post.Created).ToList();
+
+        public List<MikroblogPostReaction> GetPostReactions(int postId)
+            => _dbContext.MikroblogPostReactions.Where(reaction => reaction.PostId == postId).ToList();
+
+        public void AddPost(MikroblogPost post) => _dbContext.MikroblogPosts.Add(post);
+
+        public void AddPostReaction(MikroblogPostReaction reaction) => _dbContext.MikroblogPostReactions.Add(reaction);
+
+        public void RemovePostReaction(int id)
+            => _dbContext.MikroblogPostReactions.Remove(_dbContext.MikroblogPostReactions.
+                First(reaction => reaction.Id == id));
+
+        public MikroblogPost GetPost(int id) => _dbContext.MikroblogPosts.First(post => post.Id == id);
     }
 }

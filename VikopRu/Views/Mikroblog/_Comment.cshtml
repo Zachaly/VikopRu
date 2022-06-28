@@ -1,0 +1,12 @@
+﻿@model MikroblogCommentViewModel
+
+<form asp-action="Comment" asp-controller="Mikroblog" method="post" enctype="multipart/form-data" class="comment subcomment">
+    <div>
+        <textarea asp-for="Content">
+
+        </textarea>
+        <input asp-for="Image" />
+    </div>
+    <input asp-for="MainCommentId" hidden />
+    <input type="submit" value="Dodaj komentarz"/>
+</form>

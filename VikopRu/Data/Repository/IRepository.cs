@@ -43,5 +43,12 @@ namespace VikopRu.Data.Repository
 
         void AddCommentReaction(CommentReaction reaction);
         void RemoveCommentReaction(int id);
+
+        List<MikroblogPost> GetMikroblogPosts();
+        List<MikroblogPostReaction> GetPostReactions(int postId);
+        void AddPost(MikroblogPost post);
+        void AddPostReaction(MikroblogPostReaction reaction);
+        void RemovePostReaction(int id);
+        MikroblogPost GetPost(int id);
     }
 }

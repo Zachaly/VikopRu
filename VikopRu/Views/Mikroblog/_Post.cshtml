@@ -1,0 +1,52 @@
+﻿@model MikroblogPostViewModel
+
+<div class="comment">
+    <div class="creator">
+        <img src="@($"/ProfilePicture/{Model.Creator.ProfilePicture}")" />
+    </div>
+
+    <div class="content">
+        <div class="top">
+            <h3 class="username">
+            @Model.Creator.UserName, 
+            @Model.Created
+            </h3>
+            <div class="reactions">
+                @Model.Pluses.Count
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @using(Html.BeginForm("Plus", "Mikroblog", new { postId = Model.CommentId}, FormMethod.Post))
+                    {
+                        <button class="plus">+</button>
+                    }
+                }
+            </div>
+        </div>
+
+        <p>
+            @Model.Content
+        </p>
+
+        @if (!string.IsNullOrEmpty(Model.ImageName))
+        {
+            <img src="@($"/PostImages/{Model.ImageName}")">
+        }
+    </div>
+   
+</div>
+<div class="subcomments">
+        @foreach(var subcomment in Model.SubComments)
+        {
+            <div> 
+                <div class="filler"></div>
+                @{
+                    await Html.RenderPartialAsync("_Post", subcomment);
+                }
+            </div>
+        }
+        @if (User.Identity.IsAuthenticated && Model is MikroblogCommentViewModel == false)
+        {
+            await Html.RenderPartialAsync("_Comment",
+            new MikroblogCommentViewModel { MainCommentId = Model.CommentId });
+        }
+</div>

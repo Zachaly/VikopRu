@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Mikroblog\" />
     <Folder Include="wwwroot\images\post\" />
     <Folder Include="wwwroot\images\profilepictures\" />
   </ItemGroup>

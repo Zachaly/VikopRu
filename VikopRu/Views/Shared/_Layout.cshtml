@@ -15,6 +15,7 @@
     <nav>
         <div class="nav-container">
             <a asp-action="Index" asp-controller="Home">Strona główna</a>
+            <a asp-action="Index" asp-controller="Mikroblog">Mikroblog</a>
             <div class="account-actions">
                 @if (User.Identity.IsAuthenticated)
                 {

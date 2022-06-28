@@ -14,5 +14,8 @@ namespace VikopRu.Data
 
         public DbSet<FindingAction> FindingActions { get; set; }
         public DbSet<CommentReaction> CommentReactions { get; set; }
+
+        public DbSet<MikroblogPost> MikroblogPosts { get; set; }
+        public DbSet<MikroblogPostReaction> MikroblogPostReactions { get; set; }
     }
 }
